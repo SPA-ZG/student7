@@ -6,7 +6,7 @@
     <img
       :src="
         book.cover_edition_key
-          ? 'http://covers.openlibrary.org/b/olid/' + book.cover_edition_key + '-M.jpg'
+          ? 'https://covers.openlibrary.org/b/olid/' + book.cover_edition_key + '-M.jpg'
           : 'https://via.placeholder.com/180x250'
       "
       :alt="book.title"
