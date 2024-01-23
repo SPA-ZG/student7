@@ -1,11 +1,9 @@
 <template>
   <div class="book-item">
-    <router-link :to="{ name: 'book', params: { id: book.key.split('/')[2] } }">
-      <h3>{{ book.title }} - {{ book.author_name[0] }}</h3>
-      <img :src="book.cover_edition_key ? 'http://covers.openlibrary.org/b/olid/' + book.cover_edition_key + '-M.jpg' : 'https://via.placeholder.com/180x250'"  :alt="book.title">
-    </router-link>
-    <button @click="selectBook" v-show="!book.isInCart">Add to Cart</button>
-    <button @click="selectBook" v-show="book.isInCart">Remove from Cart</button>
+    <h3>{{ book.title }} - {{ book.author_name === undefined ? "unknown" : book.author_name[0] }}</h3>
+    <img :src="book.cover_edition_key ? 'http://covers.openlibrary.org/b/olid/' + book.cover_edition_key + '-M.jpg' : 'https://via.placeholder.com/180x250'"  :alt="book.title">
+    <button @click="selectBook" v-show="!book.isInCart">Add to Wishlist</button>
+    <button @click="selectBook" v-show="book.isInCart">Remove from Wishlist</button>
   </div>
 </template>
 
@@ -19,17 +17,8 @@
     gap: 1rem;
     padding: 1rem;
 
-    a {
-      text-decoration: none;
-      color: #000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-
-      h3 {
-        text-align: center;
-      }
+    h3 {
+      text-align: center;
     }
 
     button {

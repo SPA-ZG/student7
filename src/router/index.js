@@ -8,7 +8,7 @@ import CartView from '@/views/CartView.vue'
 const routes = [
   { path: '/', component: HomePage },
   { path: '/book/:id', component: BookDetails, name: "book" },
-  { path: '/cart', component: CartView },
+  { path: '/wish', component: CartView },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
 ];
 

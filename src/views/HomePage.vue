@@ -8,6 +8,9 @@
       <div class="header-text" v-if="loading">
         <h2>Loading...</h2>
       </div>
+      <div class="header-text" v-if="searchResults.length === 0 && !loading">
+        <h2>No results found</h2>
+      </div>
       <book-list :books="searchResults" />
     </div>
     <div v-if="!searchQuery">
@@ -62,6 +65,7 @@
 
 <script>
 import BookList from '@/components/BookList.vue'
+import router from '@/router/index.js'
 
 export default {
   components: { BookList },
@@ -77,6 +81,8 @@ export default {
   },
   methods: {
     debouncedInputHandler() {
+      this.loading = true;
+      this.searchResults = [];
       if (this.timeout) {
         clearTimeout(this.timeout);
       }
@@ -86,18 +92,15 @@ export default {
       }, 300);
     },
     inputHandler() {
-      console.log(this.loading);
+      router.push({ path: '/', query: { q: this.searchQuery } });
       if (this.controller) {
-        this.loading = true;
         this.controller.abort();
       }
-      this.searchResults = [];
-
       if (this.searchQuery === '') {
         this.loading = false;
         return;
       }
-      this.loading = true;
+
       this.controller = new AbortController();
       const { signal } = this.controller;
       fetch("http://localhost:8000/search/"+encodeURIComponent(this.searchQuery), { signal })
@@ -109,11 +112,13 @@ export default {
         .catch(error => {
           console.log(error);
         })
-
-      console.log("Debounced input value:", this.searchQuery);
     }
   },
   beforeMount() {
+    if (this.$route.query.q) {
+      this.searchQuery = this.$route.query.q;
+      this.inputHandler();
+    }
     fetch("http://localhost:8000/recommendations")
       .then(response => response.json())
       .then(data => {

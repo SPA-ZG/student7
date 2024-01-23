@@ -1,8 +1,8 @@
 <template>
   <div class="cart-body">
-    <h1>Cart</h1>
+    <h1>Wishlist</h1>
     <div v-if="cartItems.length === 0">
-      <p>Cart is empty</p>
+      <p>Wishlist is empty</p>
     </div>
     <div v-else>
       <BookItem v-for="item in cartItems" :key="item.id" :book="item" @select="handleSelect" />

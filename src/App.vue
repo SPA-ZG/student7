@@ -2,7 +2,7 @@
 <template>
   <div class="app-bar">
     <router-link to="/">Home</router-link>
-    <router-link to="/cart">Cart ({{ cartCount }})</router-link>
+    <router-link to="/wish">Wishlist ({{ cartCount }})</router-link>
   </div>
   <RouterView />
 </template>

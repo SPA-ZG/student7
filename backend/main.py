@@ -14,7 +14,6 @@ app.add_middleware(
 
 
 
-# Endpoint to search books
 @app.get("/search/{query}")
 async def search_books(query: str):
     response = requests.get(f"https://openlibrary.org/search.json?q={query}&limit=20")
@@ -23,7 +22,6 @@ async def search_books(query: str):
     return response.json()
 
 
-# Endpoint to get book details
 @app.get("/book/{book_id}")
 async def book_details(book_id: str):
     response = requests.get(f"https://openlibrary.org/works/{book_id}.json")
@@ -32,7 +30,6 @@ async def book_details(book_id: str):
     return response.json()
 
 
-# Endpoint to return recommendations data
 @app.get("/recommendations")
 async def recommendations():
     try:
