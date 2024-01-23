@@ -6,7 +6,7 @@
     </div>
     <div v-if="!!searchQuery">
       <div class="header-text" v-if="loading">
-        <h2>Loading...</h2>
+        <h2>Loading... (this could take a while)</h2>
       </div>
       <div class="header-text" v-if="searchResults.length === 0 && !loading">
         <h2>No results found</h2>
@@ -103,23 +103,27 @@ export default {
 
       this.controller = new AbortController();
       const { signal } = this.controller;
-      fetch("http://localhost:8000/search/"+encodeURIComponent(this.searchQuery), { signal })
+      fetch(import.meta.env.VITE_API_URL+"/search/"+encodeURIComponent(this.searchQuery), { signal })
         .then(response => response.json())
         .then(data => {
           this.loading = false;
           this.searchResults = data.docs;
         })
         .catch(error => {
-          console.log(error);
+          if (error.name !== 'AbortError') {
+            this.loading = false;
+            this.searchResults = [];
+          }
         })
     }
   },
   beforeMount() {
     if (this.$route.query.q) {
       this.searchQuery = this.$route.query.q;
+      this.loading = true;
       this.inputHandler();
     }
-    fetch("http://localhost:8000/recommendations")
+    fetch(import.meta.env.VITE_API_URL+"/recommendations")
       .then(response => response.json())
       .then(data => {
         this.books = data;
