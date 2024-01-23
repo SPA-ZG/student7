@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
 
 export const useCartStore = defineStore('cart', {
   state: () => ({
@@ -6,19 +6,19 @@ export const useCartStore = defineStore('cart', {
   }),
   actions: {
     getCart() {
-      return this.items;
+      return this.items
     },
     addToCart(item) {
-      this.items.push(item);
+      this.items.push(item)
     },
     removeFromCart(itemId) {
-      this.items = this.items.filter(item => item.key !== itemId);
+      this.items = this.items.filter((item) => item.key !== itemId)
     },
     clearCart() {
-      this.items = [];
+      this.items = []
     },
     isInCart(itemId) {
-      return this.items.some(item => item.key === itemId);
+      return this.items.some((item) => item.key === itemId)
     }
   }
-});
+})

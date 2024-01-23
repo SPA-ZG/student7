@@ -11,43 +11,41 @@
 </template>
 
 <style scoped>
-  .cart-body {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
-  }
-
+.cart-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
 </style>
 
-
 <script>
-import { useCartStore } from '../stores';
+import { useCartStore } from '../stores'
 import BookItem from '@/components/BookItem.vue'
 
 export default {
   components: { BookItem },
   computed: {
     cartItems() {
-      const cartStore = useCartStore();
-      return cartStore.items.map(item => {
+      const cartStore = useCartStore()
+      return cartStore.items.map((item) => {
         return {
           ...item,
           isInCart: true
-        };
-      });
+        }
+      })
     }
   },
   methods: {
     handleSelect(book) {
-      const store = useCartStore();
+      const store = useCartStore()
       if (book.isInCart) {
-        store.removeFromCart(book.key);
+        store.removeFromCart(book.key)
       } else {
-        store.addToCart(book);
+        store.addToCart(book)
       }
     }
   }
-};
+}
 </script>

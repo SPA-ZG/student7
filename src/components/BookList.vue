@@ -10,15 +10,14 @@
 </template>
 
 <style scoped>
-  .book-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    row-gap: 4rem;
-  }
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 4rem;
+}
 </style>
 
 <script>
-
 import BookItem from '@/components/BookItem.vue'
 import { useCartStore } from '@/stores/index.js'
 
@@ -27,24 +26,24 @@ export default {
   components: { BookItem },
   computed: {
     booksWithCartState() {
-      const cartStore = useCartStore();
-      return this.books.map(book => {
+      const cartStore = useCartStore()
+      return this.books.map((book) => {
         return {
           ...book,
           isInCart: cartStore.isInCart(book.key)
-        };
-      });
+        }
+      })
     }
   },
   methods: {
     handleSelect(book) {
-      const store = useCartStore();
+      const store = useCartStore()
       if (book.isInCart) {
-        store.removeFromCart(book.key);
+        store.removeFromCart(book.key)
       } else {
-        store.addToCart(book);
+        store.addToCart(book)
       }
     }
   }
-};
+}
 </script>
