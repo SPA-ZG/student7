@@ -1,35 +1,15 @@
 # nweb-projekt6
 
-This template should help get you started developing with Vue 3 in Vite.
+Način pokretanja:
+Najbolje je pokrenuti pomoću docker-compose-a, jer se tako pokreće i backend.
 
-## Recommended IDE Setup
+Naredbu koju treba pokrenuti je: `docker-compose up --build`
+Nakon toga, aplikacija je dostupna na adresi: `http://localhost:3000/`
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+Ako nemate docker, možete pokrenuti i sa sljedećim naredbama:
+- `cd backend`
+- `pip install -r requirements.txt`
+- `uvicorn main:app --reload`
+- `cd ../`
+- `npm install`
+- `npm run dev`
